@@ -17,7 +17,7 @@
 	function getS(callback){
 		var req = http.get(options, function(res) {
 		// console.log('STATUS: ' + res.statusCode);
-		return callback(res);
+		return callback(res.statusCode);
 		});
 	} 
 
