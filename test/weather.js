@@ -3,11 +3,12 @@ var chai = require('chai');
 var weather = require('../api/weather.js');
 
 describe('OpenWeatherMap', function(){
-	describe('Communication ', function(){
-		it('Should connect with the OpenWeatherMap APIs Services ', function(){
-			chai.assert.equal(weather.connect, 'ok');
+
+		it('Should connect with the OpenWeatherMap APIs Services ', function(done){
+			weather.getRequestStatus(function(status){
+				chai.assert.equal(status, 200);
+				done();
+			});
 		});
 
-		// it('Should ')
-	});
 });

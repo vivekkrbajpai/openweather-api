@@ -7,18 +7,44 @@
 		host : 'api.openweathermap.org', 
 		path: '/data/2.5/find?q=Gandino&units=metric'
 	};
-	
 
-	
-	exports.getStatus = function(callback){
-		getS(callback);
+
+	// get Response by field (satusCode, )
+	exports.getResponseByField = function(thing, callback){
+		getResponseBF(thing, callback);
 	}
 
-	function getS(callback){
-		var req = http.get(options, function(res) {
-		// console.log('STATUS: ' + res.statusCode);
-		return callback(res.statusCode);
+	// get Data by field ()
+	exports.getDataByField = function(field, callback){
+		getDataBF(field, callback);
+	}
+
+
+	function getWeatherByCity(city, callback){
+
+	}
+
+
+
+	function getResponseBF(field,callback){
+		var req = http.get(options, function(res){
+			res.on('data', function(){
+
+			});
+			return callback(res[field]);
+		})
+	}
+
+	function getDataBF(field,callback){
+		var req = http.get(options, function(res){
+			res.setEncoding('utf8');
+			res.on('data', function (chunk) {
+			  	return callback(JSON.parse(chunk).message);
+			});
+			
 		});
-	} 
+	}
+
+
 
 })();
