@@ -1,11 +1,14 @@
 // index.js  -  main file 
+
 var weather = require('./api/weather.js');
 
 
-weather.getResponseByField('statusCode', function(status){
+weather.getResponseCode(function(status){
 	console.log(status);
 });
 
-weather.getDataByField('ciao', function(data){
-	console.log(data);
+weather.setCity('Fairplay');
+
+weather.getTemperature(function(temp){
+	console.log(temp);
 })
