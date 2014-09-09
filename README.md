@@ -26,7 +26,7 @@ step is to set the params for the request :
 	// 'metric'  'internal'  'imperial'
  	weather.setUnits('metric'); 
 
- 	weathersetAPIID
+ 	weather.setAPIID('ssdglnsdogdh441s91gs6');
 
 
 
@@ -37,11 +37,45 @@ Using the following requests to API you can get current weather data for any loc
 ### Methods 
 Import the module and start to use the functions : 
 
-	// get the HTTP  statusCode of the response es. 200 
-	exports.getResponseCode = function(callback){
-		getResponseBF('statusCode', callback);
-	}
 
+	// get the HTTP  statusCode of the response es. 200 
+	weather.getResponseCode(function(code){
+		console.log(code);
+	});
+
+	// get the Temperature  
+	weather.getTemperature(function(temp){
+		console.log(temp);
+	});
+
+	// get the Atm Pressure   
+	weather.getPressure(function(pres){
+		console.log(pres);
+	});
+
+	// get the Humidity
+	weather.getTemperature(function(hum){
+		console.log(hum);
+	});
+
+	// get the Description of the weather condition   
+	weather.getDescription(function(desc){
+		console.log(desc);
+	});
+
+	// get all the JSON file returned from server (rich of info)
+	weather.getAllWeather(function(JSONObj){
+		console.log(JSONObj);
+	});
+
+	// get a simple JSON Object with temperature, humidity, pressure and description   
+	weather.getSmartJSON(function(smart){
+		console.log(smart);
+	});
+
+
+### Test 
+The package is tested with mocha anc chai, you can find the tests in the /test folder. 
 
 
 ### Hystorical Data  (TODO)
