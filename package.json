@@ -3,13 +3,14 @@
   "version": "1.0.0",
   "description": "Simple APIs for OpenWeatherMap.org weather services ! ",
   "main": "index.js",
+  "private": true,
   "scripts": {
     "start": "node index.js",
     "test": "mocha"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/CICCIOSGAMINO/openweather-api.git"
+    
   },
   "keywords": [
     "openweathermap.org",
@@ -31,6 +32,7 @@
     "chai": "^1.9.1",
     "mocha": "^1.21.4"
   },
-  "dependencies": {},
-  "engine" : "node >= 0.4.1"
+  "dependencies": {
+      "private-repo": "https://github.com/CICCIOSGAMINO/openweather-api.git"
+    },
 }
