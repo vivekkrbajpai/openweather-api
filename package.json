@@ -1,6 +1,6 @@
 {
   "name": "openweather-api",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Simple APIs for OpenWeatherMap.org weather services ! ",
   "main": "index.js",
   "scripts": {
@@ -31,5 +31,6 @@
     "chai": "^1.9.1",
     "mocha": "^1.21.4"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "engine" : "node >= 0.4.1"
 }
