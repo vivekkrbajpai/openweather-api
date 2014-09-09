@@ -2,13 +2,8 @@
 
 var weather = require('./api/weather.js');
 
+weather.setCity('Gandino');
 
-weather.getResponseCode(function(status){
-	console.log(status);
-});
-
-weather.setCity('Fairplay');
-
-weather.getTemperature(function(temp){
+weather.getDescription(function(temp){
 	console.log(temp);
-})
+});

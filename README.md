@@ -32,9 +32,16 @@ step is to set the params for the request :
 
 
 ### Current Weather Data
-Using the following requests to API you can get current weather data for any location on the Earth. Current weather data are updated in real time based on data from global weather providers and more than 40,000 weather stations. Weather data is available in JSON, XML or HTML format.
+Using the following requests to API you can get current weather data for any location on the Earth. Current weather data are updated in real time based on data from global weather providers and more than 40,000 weather stations. Weather data is available in JSON.
 
-	
+### Methods 
+Import the module and start to use the functions : 
+
+	// get the HTTP  statusCode of the response es. 200 
+	exports.getResponseCode = function(callback){
+		getResponseBF('statusCode', callback);
+	}
+
 
 
 ### Hystorical Data  (TODO)

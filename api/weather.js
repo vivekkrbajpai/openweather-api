@@ -4,7 +4,7 @@
 	var config = {
 		city : 'Fairplay',
 		units : 'metric', 
-		lang : 'it',
+		lan : 'it',
 		format : 'json',
 		APPID : null,
 
@@ -15,25 +15,21 @@
 	var http = require('http');
 	var options = {
 		host : 'api.openweathermap.org', 
-		path: '/data/2.5/find?q=Gandino&units=metric'
+		path: '/data/2.5/weather?q=fairplay'
 	};
 
 
 	// exports(set)  --------------------------------------------  exports(set)  ---------------------------------------------
 	exports.setLang = function(lang){
-		config.lang = lang; 
+		config.lan = lang.toLowerCase(); 
 	}
 
 	exports.setCity = function(city){
-		config.city = city; 
+		config.city = city.toLowerCase(); 
 	}
 
 	exports.setUnits = function(units){
-		config.units = units;
-	}
-
-	exports.setFormat = function(format){
-		config.format = format;
+		config.units = units.toLowerCase();
 	}
 
 	exports.setAPPID = function(appid){
@@ -42,7 +38,7 @@
 
 	// export(get)  ---------------------------------------------  exports(get)  ---------------------------------------------
 	exports.getLang = function(){
-		return config.lang; 
+		return config.lan; 
 	}
 
 	exports.getCity = function(){
@@ -67,18 +63,67 @@
 		getResponseBF('statusCode', callback);
 	}
 
-
 	// get temperature 
 	exports.getTemperature = function(callback){
 		getTemp(callback);
 	}
 
+	// get the atmospheric pressure 
+	exports.getPressure = function(callback){
+		getPres(callback);
+	}
 
+	exports.getHumidity = function(callback){
+		getHum(callback);
+	}
 
+	exports.getDescription = function(callback){
+		getDesc(callback);
+	}
+
+	exports.getAllWeather = function(callback){
+		getData(callback);
+	}
+
+	exports.getSmartJSON = function(callback){
+		getSmart(callback);
+	}
+
+	// active functions()  -------------------------------------  active functions()  --------------------------------------------
+
+	function getPres(callback){
+		getData(function(jsonObj){
+			return callback(jsonObj.main.pressure);
+		})
+	}
 
 	function getTemp(callback){
 		getData(function(jsonObj){
-			return callback(jsonObj.list[0].id);
+			return callback(jsonObj.main.temp);
+		})
+	}
+
+	function getHum(callback){
+		getData(function(jsonObj){
+			return callback(jsonObj.main.humidity);
+		})
+	}
+
+	function getDesc(callback){
+		getData(function(jsonObj){
+
+			return callback((jsonObj.weather)[0].description);
+		})
+	}
+
+	function getSmart(callback){
+		getData(function(jsonObj){
+			var smartJSON = {};
+			smartJSON.temp = jsonObj.main.temp;
+			smartJSON.humidity = jsonObj.main.humidity;
+			smartJSON.pressure = jsonObj.main.pressure;
+			smartJSON.description = (jsonObj.weather)[0].description;
+			return callback(smartJSON); 
 		})
 	}
 
@@ -91,10 +136,14 @@
 		})
 	}
 
+	function buildPath(){
 
+		return '/data/2.5/weather?q=' + config.city + '&units=' + config.units + '&lang=' + config.lan + '&APPID=' + config.APPID;
+
+	}
 
 	function getData(callback){
-		// options.path = path; 
+		options.path = buildPath();
 		var req = http.get(options, function(res){
 			res.setEncoding('utf8');
 			res.on('data', function (chunk) {

@@ -28,10 +28,6 @@ describe('OpenWeatherMap ', function(){
 			chai.assert.equal('fairplay', weather.getCity().toLowerCase());
 		})
 
-		it('Should set format data to XML  ', function(){
-			weather.setFormat('xml');
-			chai.assert.equal('xml', weather.getFormat().toLowerCase());
-		})
 
 		it('Should set the APPID ', function(){
 			weather.setAPPID('XNDON1111111111');
@@ -46,6 +42,40 @@ describe('OpenWeatherMap ', function(){
 				done();
 			});
 		});
+		it('Should retrive pressure data ', function(done){
+			weather.getPressure(function(pres){
+				chai.assert.typeOf(pres , 'number');
+				done();
+			});
+		});
+		it('Should retrive humidity data ', function(done){
+			weather.getHumidity(function(hum){
+				chai.assert.typeOf(hum , 'number');
+				done();
+			});
+		});
+		it('Should retrive brief description of the weather ', function(done){
+			weather.getDescription(function(desc){
+				chai.assert.typeOf(desc  , 'string');
+				done();
+			});
+		});
+
+		it('Should present all the JSON Weather response data ', function(done){
+			weather.getAllWeather(function(jsonObj){
+				chai.assert.property(jsonObj , 'weather');
+				done();
+			});
+		});
+		it('Should return a smart JSON weather object ', function(done){
+			weather.getSmartJSON(function(smart){
+				chai.assert.property(smart, 'temp');
+				chai.assert.property(smart, 'humidity');
+				chai.assert.property(smart, 'pressure');
+				chai.assert.property(smart, 'description');
+				done();
+			})
+		})
 	});	
 
 });
